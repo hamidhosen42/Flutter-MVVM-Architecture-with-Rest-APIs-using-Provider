@@ -17,7 +17,19 @@ samples, guidance on mobile development, and a full API reference.
 "# Flutter-MVVM-Architecture-with-Rest-APIs-using-Provider-" 
 
 ### MVVM Architecture
-- View -> UI
+- View -> UI Design
 - ViewModel -> Logic
 - Domain -> Network
 - Data Repository -> API Call
+- Utils -> Same component push
+- Respository -> Backend Data Network
+- Resources(res) -> Const value,Difference value etc
+- Data -> database
+- lib
+   |
+   - data
+   - res
+   - respository
+   - utils
+   - view
+   - view_model
