@@ -1,8 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, library_private_types_in_public_api, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/utils/utils.dart';
-import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -49,84 +48,88 @@ class _LoginViewState extends State<LoginScreen> {
         centerTitle: true,
       ),
       body: SafeArea(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TextFormField(
-              controller: _emailController,
-              keyboardType: TextInputType.emailAddress,
-              focusNode: emailFocusNode,
-              decoration: const InputDecoration(
-                  hintText: 'Email',
-                  labelText: 'Email',
-                  prefixIcon: Icon(Icons.alternate_email)),
-              onFieldSubmitted: (valu) {
-                // Utils.fieldFocusChange(context, emailFocusNode, passwordFocusNode);
-              },
-            ),
-            ValueListenableBuilder(
-                valueListenable: _obsecurePassword,
-                builder: (context, value, child) {
-                  return TextFormField(
-                    controller: _passwordController,
-                    obscureText: _obsecurePassword.value,
-                    focusNode: passwordFocusNode,
-                    obscuringCharacter: "*",
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      labelText: 'Password',
-                      prefixIcon: Icon(Icons.lock_open_rounded),
-                      suffixIcon: InkWell(
-                          onTap: () {
-                            _obsecurePassword.value = !_obsecurePassword.value;
-                          },
-                          child: Icon(_obsecurePassword.value
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility)),
-                    ),
-                  );
-                }),
-            SizedBox(
-              height: height * .085,
-            ),
-            // RoundButton(
-            //   title: 'Login',
-            //   loading: authViewMode.loading,
-            //   onPress: (){
-            //     if(_emailController.text.isEmpty){
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: _emailController,
+                keyboardType: TextInputType.emailAddress,
+                focusNode: emailFocusNode,
+                decoration: const InputDecoration(
+                    hintText: 'Email',
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.email_outlined)),
+                onFieldSubmitted: (valu) {
+                  Utils.fieldFocusChange(context, emailFocusNode, passwordFocusNode);
+                  // FocusScope.of(context).requestFocus(passwordFocusNode);
+                },
+              ),
+              ValueListenableBuilder(
+                  valueListenable: _obsecurePassword,
+                  builder: (context, value, child) {
+                    return TextFormField(
+                      controller: _passwordController,
+                      obscureText: _obsecurePassword.value,
+                      focusNode: passwordFocusNode,
+                      obscuringCharacter: "*",
+                      decoration: InputDecoration(
+                        hintText: 'Password',
+                        labelText: 'Password',
+                        prefixIcon: Icon(Icons.lock_open_rounded),
+                        suffixIcon: InkWell(
+                            onTap: () {
+                              _obsecurePassword.value = !_obsecurePassword.value;
+                            },
+                            child: Icon(_obsecurePassword.value
+                                ? Icons.visibility_off_outlined
+                                : Icons.visibility)),
+                      ),
+                    );
+                  }),
+              SizedBox(
+                height: height * .085,
+              ),
+              // RoundButton(
+              //   title: 'Login',
+              //   loading: authViewMode.loading,
+              //   onPress: (){
+              //     if(_emailController.text.isEmpty){
 
-            //       Utils.flushBarErrorMessage('Please enter email', context);
-            //     }else if(_passwordController.text.isEmpty){
-            //       Utils.flushBarErrorMessage('Please enter password', context);
+              //       Utils.flushBarErrorMessage('Please enter email', context);
+              //     }else if(_passwordController.text.isEmpty){
+              //       Utils.flushBarErrorMessage('Please enter password', context);
 
-            //     }else if(_passwordController.text.length < 6){
-            //       Utils.flushBarErrorMessage('Please enter 6 digit password', context);
+              //     }else if(_passwordController.text.length < 6){
+              //       Utils.flushBarErrorMessage('Please enter 6 digit password', context);
 
-            //     }else {
+              //     }else {
 
-            //       Map data = {
-            //         'email' : _emailController.text.toString(),
-            //         'password' : _passwordController.text.toString(),
-            //       };
+              //       Map data = {
+              //         'email' : _emailController.text.toString(),
+              //         'password' : _passwordController.text.toString(),
+              //       };
 
-            //       // Map data = {
-            //       //   'email' : 'eve.holt@reqres.in',
-            //       //   'password' : 'cityslicka',
-            //       // };
+              //       // Map data = {
+              //       //   'email' : 'eve.holt@reqres.in',
+              //       //   'password' : 'cityslicka',
+              //       // };
 
-            //       authViewMode.loginApi(data , context);
-            //       print('api hit');
-            //     }
-            //   },
-            // ),
-            // SizedBox(height: height * .02,),
-            // InkWell(
-            //   onTap: (){
-            //     Navigator.pushNamed(context, RoutesName.signUp);
-            //   },
-            //     child: Text("Don't have an accont? Sign Up"))
-          ],
+              //       authViewMode.loginApi(data , context);
+              //       print('api hit');
+              //     }
+              //   },
+              // ),
+              // SizedBox(height: height * .02,),
+              // InkWell(
+              //   onTap: (){
+              //     Navigator.pushNamed(context, RoutesName.signUp);
+              //   },
+              //     child: Text("Don't have an accont? Sign Up"))
+            ],
+          ),
         ),
       ),
     );
