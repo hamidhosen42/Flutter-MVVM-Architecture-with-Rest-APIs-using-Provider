@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm_architecture/utils/utils.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -38,7 +39,13 @@ class _LoginViewState extends State<LoginScreen> {
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: InkWell(
+          onTap: (){
+            Utils.flushBarErrorMessage('No Internet connection',context);
+            Utils.toastMessage("No Internet connection");
+            Utils.snackBar("No Internet connection",context);
+          },
+          child: Text('Login')),
         centerTitle: true,
       ),
       body: SafeArea(
