@@ -1,7 +1,10 @@
-// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, library_private_types_in_public_api, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, library_private_types_in_public_api, prefer_final_fields, unused_local_variable, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/utils/utils.dart';
+
+import '../res/components/round_button.dart';
+import '../utils/routes/routes_name.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -92,42 +95,32 @@ class _LoginViewState extends State<LoginScreen> {
               SizedBox(
                 height: height * .085,
               ),
-              // RoundButton(
-              //   title: 'Login',
-              //   loading: authViewMode.loading,
-              //   onPress: (){
-              //     if(_emailController.text.isEmpty){
-
-              //       Utils.flushBarErrorMessage('Please enter email', context);
-              //     }else if(_passwordController.text.isEmpty){
-              //       Utils.flushBarErrorMessage('Please enter password', context);
-
-              //     }else if(_passwordController.text.length < 6){
-              //       Utils.flushBarErrorMessage('Please enter 6 digit password', context);
-
-              //     }else {
-
-              //       Map data = {
-              //         'email' : _emailController.text.toString(),
-              //         'password' : _passwordController.text.toString(),
-              //       };
-
-              //       // Map data = {
-              //       //   'email' : 'eve.holt@reqres.in',
-              //       //   'password' : 'cityslicka',
-              //       // };
-
-              //       authViewMode.loginApi(data , context);
-              //       print('api hit');
-              //     }
-              //   },
-              // ),
-              // SizedBox(height: height * .02,),
-              // InkWell(
-              //   onTap: (){
-              //     Navigator.pushNamed(context, RoutesName.signUp);
-              //   },
-              //     child: Text("Don't have an accont? Sign Up"))
+              RoundButton(
+                title: 'Login', 
+                // loading: authViewMode.loading,
+                onPress: (){
+                  if(_emailController.text.isEmpty){
+                    Utils.flushBarErrorMessage('Please enter email', context);
+                  }else if(_passwordController.text.isEmpty){
+                    Utils.flushBarErrorMessage('Please enter password', context);
+                  }else if(_passwordController.text.length < 6){
+                    Utils.flushBarErrorMessage('Please enter 6 digit password', context);
+                  }else {
+                    Map data = {
+                      'email' : _emailController.text.toString(),
+                      'password' : _passwordController.text.toString(),
+                    };
+                    // authViewMode.loginApi(data , context);
+                    print('api hit');
+                  }
+                },
+              ),
+              SizedBox(height: height * .02,),
+              InkWell(
+                onTap: (){
+                  Navigator.pushNamed(context, RoutesName.signUp);
+                },
+                  child: Text("Don't have an accont? Sign Up"))
             ],
           ),
         ),
