@@ -2,9 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_mvvm_architecture/utils/utils.dart';
+import 'package:provider/provider.dart';
 
 import '../res/components/round_button.dart';
 import '../utils/routes/routes_name.dart';
+import '../view_model/auth_view_model.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -36,18 +38,18 @@ class _LoginViewState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final authViewMode = Provider.of<AuthViewModel>(context);
+    final authViewMode = Provider.of<AuthViewModel>(context);
 
     final height = MediaQuery.of(context).size.height * 1;
     return Scaffold(
       appBar: AppBar(
         title: InkWell(
-          onTap: (){
-            Utils.flushBarErrorMessage('No Internet connection',context);
-            Utils.toastMessage("No Internet connection");
-            Utils.snackBar("No Internet connection",context);
-          },
-          child: Text('Login')),
+            onTap: () {
+              Utils.flushBarErrorMessage('No Internet connection', context);
+              Utils.toastMessage("No Internet connection");
+              Utils.snackBar("No Internet connection", context);
+            },
+            child: Text('Login')),
         centerTitle: true,
       ),
       body: SafeArea(
@@ -66,7 +68,8 @@ class _LoginViewState extends State<LoginScreen> {
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.email_outlined)),
                 onFieldSubmitted: (valu) {
-                  Utils.fieldFocusChange(context, emailFocusNode, passwordFocusNode);
+                  Utils.fieldFocusChange(
+                      context, emailFocusNode, passwordFocusNode);
                   // FocusScope.of(context).requestFocus(passwordFocusNode);
                 },
               ),
@@ -84,7 +87,8 @@ class _LoginViewState extends State<LoginScreen> {
                         prefixIcon: Icon(Icons.lock_open_rounded),
                         suffixIcon: InkWell(
                             onTap: () {
-                              _obsecurePassword.value = !_obsecurePassword.value;
+                              _obsecurePassword.value =
+                                  !_obsecurePassword.value;
                             },
                             child: Icon(_obsecurePassword.value
                                 ? Icons.visibility_off_outlined
@@ -96,30 +100,35 @@ class _LoginViewState extends State<LoginScreen> {
                 height: height * .085,
               ),
               RoundButton(
-                title: 'Login', 
-                // loading: authViewMode.loading,
-                onPress: (){
-                  if(_emailController.text.isEmpty){
+                title: 'Login',
+                loading: authViewMode.loading,
+                onPress: () {
+                  if (_emailController.text.isEmpty) {
                     Utils.flushBarErrorMessage('Please enter email', context);
-                  }else if(_passwordController.text.isEmpty){
-                    Utils.flushBarErrorMessage('Please enter password', context);
-                  }else if(_passwordController.text.length < 6){
-                    Utils.flushBarErrorMessage('Please enter 6 digit password', context);
-                  }else {
+                  } else if (_passwordController.text.isEmpty) {
+                    Utils.flushBarErrorMessage(
+                        'Please enter password', context);
+                  } else if (_passwordController.text.length < 6) {
+                    Utils.flushBarErrorMessage(
+                        'Please enter 6 digit password', context);
+                  } else {
                     Map data = {
-                      'email' : _emailController.text.toString(),
-                      'password' : _passwordController.text.toString(),
+                      'email': _emailController.text.toString(),
+                      'password': _passwordController.text.toString(),
                     };
-                    // authViewMode.loginApi(data , context);
+                    authViewMode.loginApi(data, context);
+                    // eve.holt@reqres.in, password: cityslicka
                     print('api hit');
                   }
                 },
               ),
-              SizedBox(height: height * .02,),
+              SizedBox(
+                height: height * .02,
+              ),
               InkWell(
-                onTap: (){
-                  Navigator.pushNamed(context, RoutesName.signUp);
-                },
+                  onTap: () {
+                    Navigator.pushNamed(context, RoutesName.signUp);
+                  },
                   child: Text("Don't have an accont? Sign Up"))
             ],
           ),
