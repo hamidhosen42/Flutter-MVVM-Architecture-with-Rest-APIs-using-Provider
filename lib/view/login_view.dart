@@ -58,7 +58,7 @@ class _LoginViewState extends State<LoginScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
+            children: [ 
               TextFormField(
                 controller: _emailController,
                 keyboardType: TextInputType.emailAddress,

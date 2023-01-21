@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         theme: ThemeData(primarySwatch: Colors.deepPurple),
         debugShowCheckedModeBanner: false,
-        initialRoute: RoutesName.login,
+        initialRoute: RoutesName.signUp,
         onGenerateRoute: Routes.generateRoute,
       ),
     );
