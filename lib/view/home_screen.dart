@@ -93,6 +93,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   });
+            case null:
+              // TODO: Handle this case.
           }
           return Container();
         }),
